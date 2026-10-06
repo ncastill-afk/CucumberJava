@@ -144,7 +144,7 @@ public class OrangeEmployeeSteps_PageFactory {
 
 	    assertTrue("❌ Employee no encontrado", employeeList.validarEmployee(emp));
 	    employeeList.seleccionarEmpleado(emp);
-	    assertTrue("❌ Página detalle empleado cargada", employeeDetalle.paginaDetallesCargados());
+	    assertTrue("❌ Página detalle empleado no cargada", employeeDetalle.paginaDetallesCargados());
 	}
 
 	@And("el usuario intenta iniciar sesión")
