@@ -44,8 +44,8 @@ CucumberJava/
 │   │   │   └── pageFactory/
 │   │   │       ├── LoginOrangePage_PageFactory.java
 │   │   │       ├── HomeOrangePage_PageFactory.java
-│   │   │       └── EmployeeDetallePage_PageFactory.java
-│   │   │       └── EmployeePage_PageFactory.java
+│   │   │       ├── EmployeeDetallePage_PageFactory.java
+│   │   │       ├── EmployeePage_PageFactory.java
 │   │   │       └── ListEmployeePage_PageFactory.java
 │   │   └── resources/
 │   │       └── Features/
