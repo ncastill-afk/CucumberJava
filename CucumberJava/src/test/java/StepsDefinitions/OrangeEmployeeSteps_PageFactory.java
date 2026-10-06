@@ -1,5 +1,8 @@
 package StepsDefinitions;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
@@ -18,6 +21,7 @@ import pageFactory.HomeOrangePage_PageFactory;
 import pageFactory.LoginOrangePage_PageFactory;
 import utils.Employee;
 import utils.JsonReader;
+import utils.JsonWriter;
 import pageFactory.EmployeePage_PageFactory;
 import pageFactory.EmployeeDetallePage_PageFactory;
 import pageFactory.ListEmployeePage_PageFactory;
@@ -33,118 +37,136 @@ public class OrangeEmployeeSteps_PageFactory {
 	EmployeeDetallePage_PageFactory employeeDetalle;
 	ListEmployeePage_PageFactory employeeList;
 	
-	@Given("navegador esta abierto")
-	public void navegador_esta_abierto() {
-		//Imprimimo en pantalla
-		System.out.println("***Inside OrangeEmployeeSteps_PageFactory.class");
-		
-		System.out.println("Inside Step - navegador esta abierto");
+	@Given("que el navegador está abierto")
+	public void que_el_navegador_esta_abierto() {
+		System.out.println("Inside Step - que el navegador está abierto");
 		WebDriverManager.chromedriver().setup();
 	    ChromeOptions options= new ChromeOptions();
-		System.out.println("1.4");
 		options.addArguments("--incognito");
 		/*WebDriverManager.edgedriver().setup();
 
 		EdgeOptions options = new EdgeOptions();
 
 		options.addArguments("--inprivate");*/
-		System.out.println("1.5");
-		//options.addArguments("--remote-allow-origins=*");
 		options.addArguments("enable-automation");
-		System.out.println("1.6");
 		options.addArguments("--disable-gov");
-		System.out.println("1.7");
 	    driver= new ChromeDriver(options);
 		//driver = new EdgeDriver(options);
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 	    driver.manage().window().maximize();
 	}
 
-	@And("user está en login page")
-	public void user_está_en_login_page() {
-		System.out.println("Inside Step - user está en login page");
+	@And("el usuario está en la página de login")
+	public void el_usuario_esta_en_pagina_de_login() {
+		System.out.println("Inside Step - el usuario está en la página de login");
 		driver.navigate().to("https://opensource-demo.orangehrmlive.com/");	
 	}
 
-	@When("^user ingresa (.*) and (.*)$")
-	public void user_ingresa_username_and_password(String username, String password) {
-		System.out.println("Inside Step - user ingresa username and password");
-		
-		//Hacemos la referencia a loginPage
+	@When("el usuario ingresa {word} y {word}")
+	public void el_usuario_ingresa_username_y_password(String username, String password) {
+		System.out.println("Inside Step - el usuario ingresa username and password");
 		login= new LoginOrangePage_PageFactory(driver);
-		
-		//Escribimos el username
-		login.enterUsername(username);
-		//Escribimos el password
-		login.enterPassword(password);
-		//driver.findElement(By.id("username")).sendKeys(username);
-		//driver.findElement(By.id("password")).sendKeys(password);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		login.ingresoOrange(username, password);
 	}
 	
-	@And("user se loguea")
-	public void user_se_loguea() {
-		System.out.println("Inside Step - user se loguea");
+	@And("el usuario inicia sesión")
+	public void el_usuario_inicia_sesion() {
+		System.out.println("Inside Step - el usuario inicia sesión");
 		//Damos click en boton submit
 		login.clickOnSubmit();
-		//driver.findElement(By.id("submit")).click();
 		home= new HomeOrangePage_PageFactory(driver);
 		
 		System.out.println(driver.getCurrentUrl());
 		System.out.println(driver.getTitle());
-		home.validarHome();
-		System.out.println("Inside Step - después de validar Home");
-
+		assertTrue("❌ La página Dashboard no cargó", home.validarHome());
 	}
 	
-	@And("user choose add employee e ingresa datos basicos")
-	public void user_choose_add_employee_e_ingresa_datos_basicos() {
-		System.out.println("Inside Step - user choose add employee e ingresa datos basicos");
+	@And("el usuario selecciona agregar empleado e ingresa los datos básicos")
+	public void el_usuario_selecciona_agregar_empleado_e_ingresa_los_datos_basicos() {
+		System.out.println("Inside Step - el usuario selecciona agregar empleado e ingresa los datos básicos");
 		employee = new EmployeePage_PageFactory(driver);
 		
 		Employee emp = JsonReader.getEmployee("usuario1");
-		employee.addEmployee(emp);
-		
+
+		employee.ingresarMenuPIM();
+		assertTrue("❌ La página Add Employee no cargó", employee.ingresarAddEmployee());
+		employee.ingresarPrimerNombre(emp);
+	    employee.ingresarMedioNombre(emp);
+	    employee.ingresarApellido(emp);
+
+	    String employeeId = employee.obtenerEmployeeId();
+	    JsonWriter.actualizarEmployeeId("usuario1", employeeId);
+
+	    if (emp.switchEmployee.equalsIgnoreCase("true")) {
+	        employee.clickEnSwitch();
+	        employee.ingresarUsername(emp);
+	        employee.ingresarPassword1(emp);
+	        employee.ingresarPassword2(emp);
+	    }
+
+	    employee.clickEnGuardar();
+
+	    assertTrue("❌ Employee no fue guardado", employee.mensajeExitoso());
 
 	}
 
-	@And("user ingresa datos con detalle")
-	public void user_ingresa_datos_con_detalle() {
-		System.out.println("Inside Step - user ingresa datos con detalle");
+	@And("el usuario ingresa los datos detallados")
+	public void el_usuario_ingresa_los_datos_detallados() {
+		System.out.println("Inside Step - el usuario ingresa los datos detallados");
 		employeeDetalle = new EmployeeDetallePage_PageFactory(driver);
 		employeeDetalle.paginaDetallesCargados();
 		Employee emp = JsonReader.getEmployee("usuario1");
-		employeeDetalle.validarDatosEmpleado(emp);
-		employeeDetalle.completarPersonalDetails(emp);
-		employeeDetalle.adjuntarArchivo(emp);
-		employeeDetalle.editarAdjunto(emp);
 		
+		assertTrue("❌ La página Personal Details no cargó", employeeDetalle.paginaDetallesCargados());
+		assertEquals("❌ First Name incorrecto", emp.primerNombre, employeeDetalle.validarPrimerNombre());
+		assertEquals("❌ Middle Name incorrecto", emp.medioNombre, employeeDetalle.validarNombreMedio());
+	    assertEquals("❌ Last Name incorrecto", emp.apellido, employeeDetalle.validarApellido());
+	    assertEquals("❌ Employee ID incorrecto", emp.id, employeeDetalle.validarEmployeeId());
+				
+		employeeDetalle.completarPersonalDetails(emp);
+		assertTrue("❌ No se guardaron los detalles", employeeDetalle.guardarPersonalDetails(emp));
+		assertTrue("❌ No se guardó el archivo adjunto", employeeDetalle.adjuntarArchivo(emp));
+		assertTrue("❌ No se guardó el archivo adjunto", employeeDetalle.editarAdjunto(emp) );
 	}
 	
-	@And("user busca el empleado recien ingresado")
-	public void user_busca_el_empleado_recien_ingresado() {
-		System.out.println("Inside Step - user busca el empleado recien ingresado");
+	@And("el usuario busca el empleado recién ingresado")
+	public void el_usuario_busca_el_empleado_recien_ingresado() {
+		System.out.println("Inside Step - el usuario busca el empleado recién ingresado");
 		employeeList = new ListEmployeePage_PageFactory(driver);
 		Employee emp = JsonReader.getEmployee("usuario1");
-		employeeList.revisarEmployee(emp);
+		employeeList.clickBtnEmployeeList();
+
+	    assertTrue("❌ La página Employee List no cargó", employeeList.despliegueListEmployee());
+
+	    employeeList.enviarId(emp);
+	    employeeList.enviarApellido(emp);
+	    employeeList.clickBuscar();
+
+	    assertTrue("❌ Employee no encontrado", employeeList.validarEmployee(emp));
 	}
 
-	@Then("user do logout")
-	public void user_do_logout() {
-		System.out.println("Inside Step - user do logout");
+	@And("el usuario intenta iniciar sesión")
+	public void el_usuario_intenta_iniciar_sesion() {
+	    login.clickOnSubmit();
+	}
+	
+	@Then("debería mostrarse un mensaje de credenciales inválidas")
+	public void deberia_mostrarse_un_mensaje_de_credenciales_invalidas() {
+	    String mensaje = login.obtenerMensajeError();
+	    assertTrue("❌ No se mostró el mensaje de credenciales inválidas", mensaje.contains("Invalid credentials"));
+	}
+	
+	@Then("el usuario cierra sesión")
+	public void el_usuario_cierra_sesion() {
+		System.out.println("Inside Step - el usuario cierra sesión");
 		home.salir();
-		try {
+		/*try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		//driver.close();
+		}*/
+		driver.close();
 		//driver.quit();
 	}
 

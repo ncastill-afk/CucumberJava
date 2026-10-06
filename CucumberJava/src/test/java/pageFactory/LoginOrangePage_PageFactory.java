@@ -14,16 +14,20 @@ public class LoginOrangePage_PageFactory {
 	WebDriver driver;
 	
 	//Usamos @FindBy para guardar nuestro localizador de username
-	@FindBy(xpath = "//input[@placeholder='Username']")
+	//@FindBy(xpath = "//input[@placeholder='Username']")
+	@FindBy(name = "username")
 	WebElement txt_username;
 	
 	//Usamos @FindBy para guardar nuestro localizador de password
-	@FindBy(xpath = "//input[@placeholder='Password']")
+	//@FindBy(xpath = "//input[@placeholder='Password']")
+	@FindBy(name = "password")
 	WebElement txt_password;
 		
 	@FindBy(css = "button[type='submit']")
 	WebElement btn_submit;
 	
+	@FindBy(xpath = "//p[contains(@class,'oxd-alert-content-text')]")
+	WebElement mensajeError;
 
 	//Método constructor
 	public LoginOrangePage_PageFactory(WebDriver driver) {
@@ -32,30 +36,39 @@ public class LoginOrangePage_PageFactory {
 		//Inicializamos los elementos haciendo referencia al mismo driver
 		PageFactory.initElements(driver, this);
 	}
-		
+	
+	public void ingresoOrange(String username, String password) {
+				
+		//Escribimos el username
+		enterUsername(username);
+		//Escribimos el password
+		enterPassword(password);
+	}
 	
 	//Método para ingresar el username
 	public void enterUsername(String username) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_username));
 		txt_username.sendKeys(username);
-		//driver.findElement(txt_username).sendKeys(username);
 	}
 	
 	//Método para ingresar el password
 	public void enterPassword(String password) {
 		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
 		 wait.until(ExpectedConditions.visibilityOf(txt_password));
-
 		 txt_password.sendKeys(password);
-		//driver.findElement(txt_password).sendKeys(password);
 	}
 	
 	//Método para dar click en el botón login
 	public void clickOnSubmit() {
 		btn_submit.click();
-		//driver.findElement(btn_login).click();
+	}
+	
+	public String obtenerMensajeError() {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+	    WebElement mensaje = wait.until(ExpectedConditions.visibilityOf(mensajeError));
+
+	    return mensaje.getText();
 	}
 
 }

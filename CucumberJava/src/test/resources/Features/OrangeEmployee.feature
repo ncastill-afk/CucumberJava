@@ -1,17 +1,30 @@
-Feature: Test add employee funcionality 
+#language: es
 
-	Scenario Outline:
-	Check add employee is successful with valid credentials
+Característica: Funcionalidad de agregar empleado
 
-		Given navegador esta abierto
-		And user está en login page
-		When user ingresa <username> and <password>
-		And user se loguea
-		And user choose add employee e ingresa datos basicos
-		And user ingresa datos con detalle
-		And user busca el empleado recien ingresado
-		Then user do logout
+	Esquema del escenario: Verificar que se pueda agregar un empleado con credenciales válidas
+		Dado que el navegador está abierto
+		Y el usuario está en la página de login
+		Cuando el usuario ingresa <username> y <password>
+		Y el usuario inicia sesión
+		Y el usuario selecciona agregar empleado e ingresa los datos básicos
+		Y el usuario ingresa los datos detallados
+		Y el usuario busca el empleado recién ingresado
+		Entonces el usuario cierra sesión
 		
-		Examples:
-		|username|password|
-		|Admin|admin123|
+		Ejemplos:
+		  | username | password  |
+		  | Admin    | admin123  |
+
+
+	Escenario: Verificar que no se pueda iniciar sesión con una contraseña incorrecta
+		Dado que el navegador está abierto
+		Y el usuario está en la página de login
+		Cuando el usuario ingresa <username> y <password>
+		Y el usuario intenta iniciar sesión
+		Entonces debería mostrarse un mensaje de credenciales inválidas
+		Ejemplos:
+		  | username | password  |
+		  | Admin    | hola  |
+
+

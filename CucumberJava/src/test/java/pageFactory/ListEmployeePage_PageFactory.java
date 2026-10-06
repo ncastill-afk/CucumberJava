@@ -1,7 +1,5 @@
 package pageFactory;
 
-import static org.junit.Assert.assertTrue;
-
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -18,19 +16,19 @@ public class ListEmployeePage_PageFactory {
 	
 	WebDriver driver;
 	
-	@FindBy(xpath = "//a[text()='Employee List']")
+	@FindBy(linkText = "Employee List")
 	WebElement btnEmployeeList;
 	
-	@FindBy(xpath = "//h5[text()='Employee Information']")
+	@FindBy(xpath = "//h5[normalize-space()='Employee Information']")
 	WebElement txtEmployeeList;
 	
-	@FindBy(xpath = "(//label[text()='Employee Id']/ancestor::div[contains(@class,'oxd-input-group')]//input)[1]")
+	@FindBy(xpath = "//label[normalize-space()='Employee Id']/following::input[1]")
 	WebElement txt_employeeIdSearch;
 	
-	@FindBy(xpath = "//input[@placeholder='Type for hints...']")
+	@FindBy(xpath = "//label[normalize-space()='Employee Name']/following::input[@placeholder='Type for hints...'][1]")
 	WebElement txt_employeeName;
 	
-	@FindBy(xpath =	"//button[@type='submit']")
+	@FindBy(xpath = "//button[normalize-space()='Search']")
 	WebElement btnSearch;
 	
 	@FindBy(xpath = "//div[contains(@class,'oxd-table-body')]")
@@ -44,34 +42,46 @@ public class ListEmployeePage_PageFactory {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void revisarEmployee(Employee emp) {
+	public void clickBtnEmployeeList() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		
 		WebElement btnEmployee = wait.until(ExpectedConditions.elementToBeClickable(btnEmployeeList));
 		btnEmployee.click();
-		
+	}
+	
+	public boolean despliegueListEmployee() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement list_Employee = wait.until(ExpectedConditions.visibilityOf(txtEmployeeList));
- 	    assertTrue("❌ La página Employee List no cargó", list_Employee.isDisplayed());
- 		System.out.println("Página Employee List cargada");
- 		
- 		wait.until(ExpectedConditions.visibilityOf(txt_employeeIdSearch));
 
-        txt_employeeIdSearch.clear();
-
+ 	    return list_Employee.isDisplayed();
+	}
+	
+	public void enviarId(Employee emp){
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.visibilityOf(txt_employeeIdSearch));
+ 		txt_employeeIdSearch.clear();
  	    txt_employeeIdSearch.sendKeys(emp.id);
-
+	}
+	
+	public void enviarApellido(Employee emp){
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+ 		wait.until(ExpectedConditions.visibilityOf(txt_employeeName));
+ 		txt_employeeName.clear();
  	    txt_employeeName.sendKeys(emp.apellido);
- 	    System.out.println("Antes del click en search");
- 	    btnSearch.click();
- 	    System.out.println("Después del click en search");
+	}
+	
+	public void clickBuscar(){
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+	    btnSearch.click();
  	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("oxd-form-loader")));
  	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'oxd-table-body')]")));
- 	    
- 	    System.out.println("Búsqueda realizada");
+	}
+	
+	public boolean validarEmployee(Employee emp) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+	    WebElement tabla = wait.until(ExpectedConditions.visibilityOf(tablaResultados));
+	    String resultado = tabla.getText();
 
- 	    assertTrue("❌ Employee no encontrado", tablaResultados.getText().contains(emp.apellido));
- 	    assertTrue("❌ Employee no encontrado", tablaResultados.getText().contains(emp.id));
- 	    System.out.println("Empleado encontrado");
+	    return resultado.contains(emp.apellido) && resultado.contains(emp.id);
 	}
 
 }
