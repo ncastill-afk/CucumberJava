@@ -143,6 +143,8 @@ public class OrangeEmployeeSteps_PageFactory {
 	    employeeList.clickBuscar();
 
 	    assertTrue("❌ Employee no encontrado", employeeList.validarEmployee(emp));
+	    employeeList.seleccionarEmpleado(emp);
+	    assertTrue("❌ Página detalle empleado cargada", employeeDetalle.paginaDetallesCargados());
 	}
 
 	@And("el usuario intenta iniciar sesión")
@@ -160,14 +162,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	public void el_usuario_cierra_sesion() {
 		System.out.println("Inside Step - el usuario cierra sesión");
 		home.salir();
-		/*try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		driver.close();
-		//driver.quit();
+		driver.quit();
 	}
 
 

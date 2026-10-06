@@ -83,5 +83,11 @@ public class ListEmployeePage_PageFactory {
 
 	    return resultado.contains(emp.apellido) && resultado.contains(emp.id);
 	}
+	
+	public void seleccionarEmpleado(Employee emp) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+	    WebElement tabla = wait.until(ExpectedConditions.visibilityOf(tablaResultados));
+	    tabla.click();
+	}
 
 }
