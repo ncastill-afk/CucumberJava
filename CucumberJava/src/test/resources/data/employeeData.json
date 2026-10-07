@@ -3,7 +3,7 @@
     "primerNombre" : "Noelia",
     "medioNombre" : "Monica",
     "apellido" : "Palacios",
-    "id" : "0447",
+    "id" : "0471",
     "switchEmployee" : "true",
     "username" : "noeliapalaciosin",
     "password1" : "Ncastill123!",
@@ -16,9 +16,9 @@
     "estadoCivil" : "Single",
     "birthDate" : "1977-08-16",
     "sexo" : "Female",
-    "file1" : "C:/Users/danae/Downloads/imprimir.pdf",
+    "file1" : "src/test/resources/files/imprimir.pdf",
     "comment" : "imprimir adjunto",
-    "file2" : "C:/Users/danae/Downloads/imprimir2.pdf"
+    "file2" : "src/test/resources/files/imprimir2.pdf"
   },
   "usuario2" : {
     "primerNombre" : "Catalina",
@@ -37,8 +37,8 @@
     "estadoCivil" : "Single",
     "birthDate" : "2016-04-18",
     "sexo" : "Female",
-    "file1" : "C:/Users/danae/Downloads/imprimir.pdf",
+    "file1" : "src/test/resources/files/imprimir.pdf",
     "comment" : "imprimir adjunto",
-    "file2" : "C:/Users/danae/Downloads/imprimir2.pdf"
+    "file2" : "src/test/resources/files/imprimir2.pdf"
   }
 }

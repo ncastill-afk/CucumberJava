@@ -1,6 +1,7 @@
 package pageFactory;
 
 import java.time.Duration;
+import java.nio.file.Paths;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -219,7 +220,8 @@ public class EmployeeDetallePage_PageFactory {
 	public boolean adjuntarArchivo(Employee emp) {
 		System.out.println("En adjuntar archivo");
 		clickAdjuntarArchivo();
-		cargarArchivo(emp.file1);
+		String rutaArchivo = Paths.get(emp.file1).toAbsolutePath().toString();
+		cargarArchivo(rutaArchivo);
 	    ingresarComentario(emp);
 		
 	    
@@ -274,7 +276,8 @@ public class EmployeeDetallePage_PageFactory {
 	
 	public boolean editarAdjunto(Employee emp) {
 	    clickEditarAdjunto();
-	    cargarArchivo(emp.file2);
+	    String rutaArchivo = Paths.get(emp.file2).toAbsolutePath().toString();
+		cargarArchivo(rutaArchivo);
 	    	    
 	    /*List<WebElement> botones = driver.findElements(By.xpath("//button[@type='submit']"));
 	    System.out.println("Cantidad Save: " + botones.size());*/

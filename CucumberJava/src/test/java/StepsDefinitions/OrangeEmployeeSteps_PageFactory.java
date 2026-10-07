@@ -115,6 +115,7 @@ public class OrangeEmployeeSteps_PageFactory {
 		System.out.println("Inside Step - el usuario ingresa los datos detallados");
 		employeeDetalle = new EmployeeDetallePage_PageFactory(driver);
 		employeeDetalle.paginaDetallesCargados();
+
 		Employee emp = JsonReader.getEmployee("usuario1");
 		
 		assertTrue("❌ La página Personal Details no cargó", employeeDetalle.paginaDetallesCargados());
@@ -122,8 +123,8 @@ public class OrangeEmployeeSteps_PageFactory {
 		assertEquals("❌ Middle Name incorrecto", emp.medioNombre, employeeDetalle.validarNombreMedio());
 	    assertEquals("❌ Last Name incorrecto", emp.apellido, employeeDetalle.validarApellido());
 	    assertEquals("❌ Employee ID incorrecto", emp.id, employeeDetalle.validarEmployeeId());
-				
-		employeeDetalle.completarPersonalDetails(emp);
+
+	    employeeDetalle.completarPersonalDetails(emp);
 		assertTrue("❌ No se guardaron los detalles", employeeDetalle.guardarPersonalDetails(emp));
 		assertTrue("❌ No se guardó el archivo adjunto", employeeDetalle.adjuntarArchivo(emp));
 		assertTrue("❌ No se guardó el archivo adjunto", employeeDetalle.editarAdjunto(emp) );

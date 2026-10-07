@@ -38,7 +38,7 @@ CucumberJava/
 │   ├── test/
 │   │   ├── java/
 │   │   │   ├── TestRunner/
-│   │   │   │   └── TestRunnerOrangePageFactory.java
+│   │   │   │   └── TestRunnerOrange.java
 │   │   │   ├── StepsDefinitions/
 │   │   │   │   └── OrangeEmployeeSteps_PageFactory.java
 │   │   │   └── pageFactory/
@@ -48,8 +48,10 @@ CucumberJava/
 │   │   │       ├── EmployeePage_PageFactory.java
 │   │   │       └── ListEmployeePage_PageFactory.java
 │   │   └── resources/
-│   │       └── Features/
-│   │           └── OrangeEmployee.feature
-│
+│   │       ├── Features/
+│   │       │   └── OrangeEmployee.feature
+│   │       └── Files/
+│   │           ├── imprimir.pdf
+│               └── imprimir2.pdf
 ├── pom.xml
 └── README.md
