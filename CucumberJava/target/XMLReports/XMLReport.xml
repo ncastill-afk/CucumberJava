@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="75.143" tests="2" skipped="0" failures="0" errors="0">
+<testcase classname="Funcionalidad de agregar empleado" name="Verificar que se pueda agregar un empleado con credenciales válidas - Example #1.1" time="63.749">
+<system-out><![CDATA[
+Dado que el navegador está abierto..........................................passed
+Y el usuario está en la página de login.....................................passed
+Cuando el usuario ingresa Admin y admin123..................................passed
+Y el usuario inicia sesión..................................................passed
+Y el usuario selecciona agregar empleado e ingresa los datos básicos........passed
+Y el usuario ingresa los datos detallados...................................passed
+Y el usuario busca el empleado recién ingresado.............................passed
+Entonces el usuario cierra sesión...........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Funcionalidad de agregar empleado" name="Verificar que no se pueda iniciar sesión con una contraseña incorrecta - Example #1.1" time="11.146">
+<system-out><![CDATA[
+Dado que el navegador está abierto..........................................passed
+Y el usuario está en la página de login.....................................passed
+Cuando el usuario ingresa Admin y hola......................................passed
+Y el usuario intenta iniciar sesión.........................................passed
+Entonces debería mostrarse un mensaje de credenciales inválidas.............passed
+]]></system-out>
+</testcase>
+</testsuite>
