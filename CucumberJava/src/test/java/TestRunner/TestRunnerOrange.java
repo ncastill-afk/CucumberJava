@@ -15,6 +15,6 @@ plugin= {"pretty", "html:target/HtmlReports/HtmlReport.html",
 //tags="@SmokeTest"
 )
 
-public class TestRunnerOrangePageFactory {
+public class TestRunnerOrange {
 
 }

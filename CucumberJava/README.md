@@ -29,6 +29,29 @@ El objetivo es automatizar escenarios funcionales aplicando buenas prácticas de
 - Page Object Model (POM)
 - PageFactory
 
+## Instrucciones de ejecución
+
+Para ejecutar las pruebas automatizadas:
+
+1. Abrir el proyecto en Eclipse.
+2. Dirigirse a la clase TestRunnerOrange.java ubicada en:
+
+src/test/java/TestRunner/TestRunnerOrange.java
+
+3. Hacer clic derecho sobre TestRunnerOrange.java.
+4. Seleccionar: **Run As → JUnit Test**
+5. Cucumber ejecutará los escenarios definidos en:
+
+src/test/resources/Features/OrangeEmployee.feature
+
+## Reportes
+
+Una vez finalizada la ejecución, los reportes se generan automáticamente en las siguientes carpetas:
+
+- target/HtmlReports
+- target/JSONReports
+- target/XMLReports
+
 ## Estructura del proyecto
 
 ```text

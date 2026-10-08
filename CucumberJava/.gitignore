@@ -1,4 +1,9 @@
-/target/
+/target/cucumber-report-html
+/target/generated-sources
+/target/generated-test-sources
+/target/maven-archiver
+/target/maven-status
+/target/surefire-reports
 /src/test/java/pageFactory/ConfirmaciónPage_PageFactory.java
 /src/test/java/pageFactory/DestinoPage_PageFactory.java
 /src/test/java/pageFactory/HomePage_PageFactory.java
@@ -17,9 +22,10 @@
 /src/test/resources/FeaturesWithTags/
 /src/test/resources/HooksDemo/
 /src/test/resources/BackgroundDemo/
-/src/test/resources/AgenciaViaje.feature
-/src/test/resources/GoogleSearch.feature
-/src/test/resources/login.feature
-/src/test/resources/loginDemo.feature
+/src/test/resources/Features/AgenciaViaje.feature
+/src/test/resources/Features/GoogleSearch.feature
+/src/test/resources/Features/login.feature
+/src/test/resources/Features/loginDemo.feature
 /src/test/java/TestRunnerForBackgroundDemo/
 
+/target/
