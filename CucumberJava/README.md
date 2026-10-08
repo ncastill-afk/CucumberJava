@@ -48,9 +48,9 @@ src/test/resources/Features/OrangeEmployee.feature
 
 Una vez finalizada la ejecución, los reportes se generan automáticamente en las siguientes carpetas:
 
-- target/HtmlReports
-- target/JSONReports
-- target/XMLReports
+- target/HtmlReports/HtmlReport.html
+- target/JSONReports/JSONReport.json
+- target/XMLReports/XMLReport.xml
 
 ## Estructura del proyecto
 
@@ -76,5 +76,10 @@ CucumberJava/
 │   │       └── Files/
 │   │           ├── imprimir.pdf
 │               └── imprimir2.pdf
+├── tarjet/
+│   ├── HtmlReports/HtmlReport.html
+│   ├── JSONReports/JSONReport.json
+│   ├── XMLReports/XMLReport.xml
+│   └── cucumber.json
 ├── pom.xml
 └── README.md
