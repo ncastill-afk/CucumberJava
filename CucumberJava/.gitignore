@@ -4,6 +4,7 @@
 /target/maven-archiver
 /target/maven-status
 /target/surefire-reports
+/classes/META-INF
 /target/test-classes/
 /hs_err_pid42052.log
 /hs_err_pid50480.log
