@@ -14,8 +14,6 @@ El objetivo es automatizar escenarios funcionales aplicando buenas prácticas de
 | Selenium WebDriver | 4.9.0 |
 | Cucumber | 7.12.0 |
 | JUnit | 4.13.2 |
-| Maven | 2.22.0 |
-| GitHub | 5.9.2 |
 
 ## Herramientas utilizadas
 
@@ -29,28 +27,52 @@ El objetivo es automatizar escenarios funcionales aplicando buenas prácticas de
 - Page Object Model (POM)
 - PageFactory
 
-## Instrucciones de ejecución
+## Funcionalidades automatizadas
 
-Para ejecutar las pruebas automatizadas:
+El proyecto incluye pruebas funcionales automatizadas sobre la aplicación OrangeHRM.
 
-1. Abrir el proyecto en Eclipse.
-2. Dirigirse a la clase TestRunnerOrange.java ubicada en:
+- **Inicio de sesión:** acceso a la aplicación con credenciales válidas.
+- **Gestión de empleados:** registro de un nuevo empleado mediante el módulo PIM.
+- **Datos personales:** ingreso y validación de información del empleado.
+- **Adjuntar archivos:** carga de documentos PDF y edición de información del archivo adjunto.
+- **Búsqueda de empleados:** localización de empleados mediante su identificador y apellido.
+- **Cierre de sesión:** finalización de la sesión del usuario.
+- **Pruebas negativas de login:** validación del comportamiento de la aplicación cuando se ingresan credenciales incorrectas, si este escenario está implementado.
 
-src/test/java/TestRunner/TestRunnerOrange.java
+## Diseño y buenas prácticas
 
-3. Hacer clic derecho sobre TestRunnerOrange.java.
-4. Seleccionar: **Run As → JUnit Test**
-5. Cucumber ejecutará los escenarios definidos en:
+El proyecto aplica el patrón **Page Object Model (POM)** utilizando PageFactory para organizar los elementos y las acciones de las páginas web.
 
-src/test/resources/Features/OrangeEmployee.feature
+Las principales prácticas utilizadas son:
 
-## Reportes
+- **Separación de responsabilidades:** las interacciones con la página se encuentran en las clases PageFactory y las validaciones de los escenarios se realizan en los Step Definitions.
+- **Reutilización de código:** los métodos permiten reutilizar acciones comunes, como iniciar sesión, guardar información y buscar empleados.
+- **Localizadores de elementos:** uso de selectores CSS y XPath para identificar los componentes de la interfaz.
+- **Esperas explícitas:** utilización de WebDriverWait y ExpectedConditions para esperar las condiciones necesarias antes de interactuar con los elementos.
+- **Datos de prueba:** uso de archivos JSON para administrar los datos de los empleados.
+- **Reportes de ejecución:** generación de reportes HTML, JSON y XML para revisar los resultados de las pruebas.
 
-Una vez finalizada la ejecución, los reportes se generan automáticamente en las siguientes carpetas:
+## Organización de las pruebas
 
-- target/HtmlReports/HtmlReport.html
-- target/JSONReports/JSONReport.json
-- target/XMLReports/XMLReport.xml
+Las pruebas se definen en archivos Feature utilizando Cucumber y se implementan mediante Step Definitions en Java.
+
+- **Feature:** describe los escenarios de prueba en un lenguaje legible.
+- **Step Definitions:** relaciona los pasos de Gherkin con los métodos Java.
+- **PageFactory:** centraliza los localizadores y las acciones de cada página.
+- **TestRunner:** permite ejecutar los escenarios mediante Cucumber y JUnit.
+
+## Datos y archivos de prueba
+
+Los datos de prueba se administran mediante archivos JSON.
+
+Los documentos utilizados para las pruebas de carga de archivos se encuentran en:
+
+src/test/resources/Files/
+
+- imprimir.pdf
+- imprimir2.pdf
+
+Esta organización permite mantener los archivos de prueba dentro del proyecto y evitar depender de rutas locales específicas de cada computador.
 
 ## Estructura del proyecto
 
@@ -76,10 +98,50 @@ CucumberJava/
 │   │       └── Files/
 │   │           ├── imprimir.pdf
 │               └── imprimir2.pdf
-├── tarjet/
+├── target/
 │   ├── HtmlReports/HtmlReport.html
 │   ├── JSONReports/JSONReport.json
 │   ├── XMLReports/XMLReport.xml
 │   └── cucumber.json
 ├── pom.xml
 └── README.md
+```
+
+## Requisitos previos
+
+Antes de ejecutar el proyecto, se recomienda contar con:
+
+- Java JDK instalado y configurado.
+- Eclipse IDE.
+- Maven y las dependencias del proyecto configuradas en pom.xml.
+- Google Chrome instalado, si el Runner utiliza ChromeDriver.
+- Acceso a Internet para ingresar al sitio de demostración OrangeHRM.
+
+## Instrucciones de ejecución
+
+Para ejecutar las pruebas automatizadas:
+
+1. Abrir el proyecto en Eclipse.
+2. Dirigirse a la clase TestRunnerOrange.java ubicada en:
+
+src/test/java/TestRunner/TestRunnerOrange.java
+
+3. Hacer clic derecho sobre TestRunnerOrange.java.
+4. Seleccionar: **Run As → JUnit Test**
+5. Cucumber ejecutará los escenarios definidos en:
+
+src/test/resources/Features/OrangeEmployee.feature
+
+## Reportes
+
+Una vez finalizada la ejecución, los reportes se generan automáticamente en las siguientes carpetas:
+
+- target/HtmlReports/HtmlReport.html
+- target/JSONReports/JSONReport.json
+- target/XMLReports/XMLReport.xml
+
+## Alcance del proyecto
+
+Este proyecto tiene fines educativos y de portafolio profesional. Permite demostrar conocimientos de automatización de pruebas funcionales con Java, Selenium WebDriver, Cucumber y JUnit, junto con la aplicación del patrón Page Object Model y la organización de datos de prueba.
+
+La ejecución depende de la disponibilidad del sitio público de demostración OrangeHRM y de que sus elementos e interfaz se mantengan compatibles con los localizadores utilizados en las pruebas.
