@@ -88,13 +88,14 @@ public class EmployeeDetallePage_PageFactory {
 	WebElement toastMessage;
 	
 	public EmployeeDetallePage_PageFactory(WebDriver driver) {
-		//Hacemos referencia al driver
+		//Hacer referencia al driver
 		this.driver=driver;
-		//Inicializamos los elementos hacciendo referencia al mismo driver
+		//Inicializar los elementos hacciendo referencia al mismo driver
 		PageFactory.initElements(driver, this);
 	}
 	
 	public boolean paginaDetallesCargados() {
+		//Página de detalles desplegados
 		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		 WebElement personalDetails = wait.until(ExpectedConditions.visibilityOf(txtPersonalDetails));
@@ -105,6 +106,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public String validarPrimerNombre() {
+		//Validar primer nombre
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_firstName));
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(txt_firstName,"value"));
@@ -113,6 +115,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public String validarNombreMedio(){
+		//Validar segundo nombre
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_middleName));
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(txt_middleName,"value"));
@@ -121,6 +124,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 
 	public String validarApellido() {
+		//Validar apellido
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_lastName));
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(txt_lastName,"value"));
@@ -129,6 +133,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public String validarEmployeeId(){
+		//Validar id del empleado
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_employeeId));
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(txt_employeeId,"value"));
@@ -137,6 +142,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void completarPersonalDetails(Employee emp) {
+		//Completar datos de detalle personales
 		System.out.println("completarPersonalDetails");
 		ingresarNumLicencia(emp);
 	    
@@ -153,6 +159,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void ingresarNumLicencia(Employee emp) {
+		//Ingresar numero de licencia
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.visibilityOf(txt_licenseNumber));
 	    txt_licenseNumber.clear();
@@ -160,6 +167,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void ingresarOtroId(Employee emp) {
+		//Ingresar otro id
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.visibilityOf(txt_otherId));
 	    txt_otherId.clear();
@@ -167,18 +175,21 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void ingresarExpiracionLicencia(Employee emp) {
+		//Ingresar fecha expiración de la licencia
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.visibilityOf(txt_licenseExpiry));
 	    txt_licenseExpiry.sendKeys(emp.licenseExpiry);
 	}
 	
 	public void ingresarFechaNac(Employee emp) {
+		//Ingresar fecha de nacimiento
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.visibilityOf(txt_birthDate));
 	    txt_birthDate.sendKeys(emp.birthDate);
 	}
 	
 	public void seleccionarDropdown(WebElement dropdown, String valor) {
+		//Seleccionar Dropdown
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.oxd-form-loader")));
 		
@@ -188,6 +199,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void seleccionarGenero(String gender) {
+		//Seleccionar Género
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.oxd-form-loader")));
 	    
@@ -202,6 +214,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void presionarGuardar(WebElement boton) {
+		//Presionar sobre el botón Guardar
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.visibilityOf(boton));
 	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.oxd-form-loader")));
@@ -210,6 +223,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public String mensajeExitoso() {
+		//Mensaje exitoso
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement toast = wait.until(ExpectedConditions.visibilityOf(toastMessage));
 	    String mensaje = toast.getText();
@@ -218,6 +232,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public boolean adjuntarArchivo(Employee emp) {
+		//Adjuntar archivo
 		System.out.println("En adjuntar archivo");
 		clickAdjuntarArchivo();
 		String rutaArchivo = Paths.get(emp.file1).toAbsolutePath().toString();
@@ -244,6 +259,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void clickAdjuntarArchivo() {
+		//Presionar sobre el botón para adjuntar el archivo
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(btnAddAttachment));
 	    JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -253,6 +269,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void cargarArchivo(String archivo){
+		//Cargar el archivo adjunto
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement upload = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='file']")));
 	    upload.sendKeys(archivo);
@@ -261,6 +278,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void ingresarComentario(Employee emp){
+		//Ingresar comentario
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_comment));
 		txt_comment.clear();
@@ -268,6 +286,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public boolean guardarPersonalDetails(Employee emp) {
+		//Guardar datos de detalle personales
 	    presionarGuardar(btnSave);
 	    String message = mensajeExitoso();
 
@@ -275,6 +294,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public boolean editarAdjunto(Employee emp) {
+		//Editar archivo adjunto
 	    clickEditarAdjunto();
 	    String rutaArchivo = Paths.get(emp.file2).toAbsolutePath().toString();
 		cargarArchivo(rutaArchivo);
@@ -289,6 +309,7 @@ public class EmployeeDetallePage_PageFactory {
 	}
 	
 	public void clickEditarAdjunto(){
+		//Hacer click en editar archivo adjunto
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    WebElement editar = wait.until(ExpectedConditions.elementToBeClickable(btnEditAttachment));
 	    editar.click();

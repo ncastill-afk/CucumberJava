@@ -31,22 +31,23 @@ public class LoginOrangePage_PageFactory {
 
 	//Método constructor
 	public LoginOrangePage_PageFactory(WebDriver driver) {
-		//Hacemos referencia al driver
+		//Hacer referencia al driver
 		this.driver=driver;
-		//Inicializamos los elementos haciendo referencia al mismo driver
+		//Inicializar los elementos haciendo referencia al mismo driver
 		PageFactory.initElements(driver, this);
 	}
 	
 	public void ingresoOrange(String username, String password) {
 				
-		//Escribimos el username
+		//Escribir el username
 		enterUsername(username);
-		//Escribimos el password
+		//Escribir el password
 		enterPassword(password);
 	}
 	
 	//Método para ingresar el username
 	public void enterUsername(String username) {
+		//Ingreso del username
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_username));
 		txt_username.sendKeys(username);
@@ -54,6 +55,7 @@ public class LoginOrangePage_PageFactory {
 	
 	//Método para ingresar el password
 	public void enterPassword(String password) {
+		//Ingreso del password
 		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		 wait.until(ExpectedConditions.visibilityOf(txt_password));
 		 txt_password.sendKeys(password);
@@ -65,6 +67,7 @@ public class LoginOrangePage_PageFactory {
 	}
 	
 	public String obtenerMensajeError() {
+		//Obtener el mensaje de error
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    WebElement mensaje = wait.until(ExpectedConditions.visibilityOf(mensajeError));
 

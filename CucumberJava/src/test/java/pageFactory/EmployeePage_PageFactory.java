@@ -1,6 +1,8 @@
 package pageFactory;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -57,19 +59,21 @@ public class EmployeePage_PageFactory {
 
 	
 	public EmployeePage_PageFactory(WebDriver driver) {
-		//Hacemos referencia al driver
+		//Hacer referencia al driver
 		this.driver=driver;
-		//Inicializamos los elementos hacciendo referencia al mismo driver
+		//Inicializar los elementos hacciendo referencia al mismo driver
 		PageFactory.initElements(driver, this);
 	}
 	
 	public void ingresarMenuPIM() {
+		//Seleccionar el menú PIM
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement pim = wait.until(ExpectedConditions.elementToBeClickable(menuPIM));
 	    pim.click();
 	}
 	
 	public boolean ingresarAddEmployee() {
+		//Ingresar a la página Add Employee
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement addEmployee = wait.until(ExpectedConditions.elementToBeClickable(btnAddEmployee));
  	    addEmployee.click();
@@ -80,6 +84,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public void ingresarPrimerNombre(Employee emp) {
+		//Ingresar primer nombre
 		By loader = By.className("oxd-form-loader");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(loader));
@@ -89,6 +94,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public void ingresarMedioNombre(Employee emp) {
+		//Ingresar segundo nombre
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement middleName = wait.until(ExpectedConditions.visibilityOf(txt_middleName));
 		middleName.clear();
@@ -96,6 +102,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public void ingresarApellido(Employee emp) {
+		//Ingresar apellido
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement lastName = wait.until(ExpectedConditions.visibilityOf(txt_lastName));
 		lastName.clear();
@@ -103,6 +110,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public String obtenerEmployeeId() {
+		//Obtener el id del empleado
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    wait.until(ExpectedConditions.visibilityOf(txt_employeeId));
 	    String employeeId = txt_employeeId.getAttribute("value");
@@ -111,21 +119,33 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public void clickEnSwitch() {
+		//Hacer click en el Switch
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement switchElement = wait.until(ExpectedConditions.elementToBeClickable(switch_emp));
 		switchElement.click();
 	    System.out.println("Switch activado");
 	}
 	
-	public void ingresarUsername(Employee emp) {
+	public void ingresarUsername(String usernameUnico) {
+		//Ingresar username unico
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement username = wait.until(ExpectedConditions.visibilityOf(txt_username));
 		username.clear();
-        username.sendKeys(emp.username);
+        username.sendKeys(usernameUnico);
 
 	}
 	
+	public String generarUsernameUnico(Employee emp) {
+		//Genera una fecha unica para concatenarlo al username
+	    String fecha = LocalDateTime.now().format(
+	        DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
+	    );
+
+	    return emp.username + fecha;
+	}
+	
 	public void ingresarPassword1(Employee emp) {
+		//Ingresa password 1
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement password1 = wait.until(ExpectedConditions.visibilityOf(txt_password1));
 		password1.clear();
@@ -133,6 +153,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public void ingresarPassword2(Employee emp) {
+		//Ingresa password 2
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement password2 = wait.until(ExpectedConditions.visibilityOf(txt_password2));
 		password2.clear();
@@ -140,6 +161,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public void clickEnGuardar() {
+		//Click en guardar
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement save = wait.until(ExpectedConditions.elementToBeClickable(btnSave));
  	    save.click();
@@ -147,6 +169,7 @@ public class EmployeePage_PageFactory {
 	}
 	
 	public boolean mensajeExitoso() {
+		//Mensaje exitoso
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
  	    WebElement toast = wait.until(ExpectedConditions.visibilityOf(toastMessage));
  	    String mensaje = toast.getText();

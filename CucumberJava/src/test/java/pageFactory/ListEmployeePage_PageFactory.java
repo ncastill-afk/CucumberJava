@@ -36,19 +36,21 @@ public class ListEmployeePage_PageFactory {
 	
 	
 	public ListEmployeePage_PageFactory(WebDriver driver) {
-		//Hacemos referencia al driver
+		//Hacer referencia al driver
 		this.driver=driver;
-		//Inicializamos los elementos hacciendo referencia al mismo driver
+		//Inicializar los elementos hacciendo referencia al mismo driver
 		PageFactory.initElements(driver, this);
 	}
 	
 	public void clickBtnEmployeeList() {
+		//Hacer click en botón de List Employee
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement btnEmployee = wait.until(ExpectedConditions.elementToBeClickable(btnEmployeeList));
 		btnEmployee.click();
 	}
 	
 	public boolean despliegueListEmployee() {
+		//Despiegue de List Employee
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		WebElement list_Employee = wait.until(ExpectedConditions.visibilityOf(txtEmployeeList));
 
@@ -56,6 +58,7 @@ public class ListEmployeePage_PageFactory {
 	}
 	
 	public void enviarId(Employee emp){
+		//Enviar el id del employee para buscarlo
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(txt_employeeIdSearch));
  		txt_employeeIdSearch.clear();
@@ -63,6 +66,7 @@ public class ListEmployeePage_PageFactory {
 	}
 	
 	public void enviarApellido(Employee emp){
+		//Enviar el apellido del employee para buscarlo
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
  		wait.until(ExpectedConditions.visibilityOf(txt_employeeName));
  		txt_employeeName.clear();
@@ -70,6 +74,7 @@ public class ListEmployeePage_PageFactory {
 	}
 	
 	public void clickBuscar(){
+		//Hacer click en buscar
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    btnSearch.click();
  	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("oxd-form-loader")));
@@ -77,6 +82,7 @@ public class ListEmployeePage_PageFactory {
 	}
 	
 	public boolean validarEmployee(Employee emp) {
+		//Validar empleado
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    WebElement tabla = wait.until(ExpectedConditions.visibilityOf(tablaResultados));
 	    String resultado = tabla.getText();
@@ -85,6 +91,7 @@ public class ListEmployeePage_PageFactory {
 	}
 	
 	public void seleccionarEmpleado(Employee emp) {
+		//Seleccionar empleado
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	    WebElement tabla = wait.until(ExpectedConditions.visibilityOf(tablaResultados));
 	    tabla.click();

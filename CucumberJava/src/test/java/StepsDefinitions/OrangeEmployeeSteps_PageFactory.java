@@ -29,9 +29,8 @@ import pageFactory.ListEmployeePage_PageFactory;
 public class OrangeEmployeeSteps_PageFactory {
 	WebDriver driver=null;
 	
-	//Referimos metodos de Page factory
+	//Referir métodos de Page factory
 	LoginOrangePage_PageFactory login;
-	//Referimos el metodos de Home HomePage factory
 	HomeOrangePage_PageFactory home;
 	EmployeePage_PageFactory employee;
 	EmployeeDetallePage_PageFactory employeeDetalle;
@@ -40,6 +39,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	@Given("que el navegador está abierto")
 	public void que_el_navegador_esta_abierto() {
 		System.out.println("Inside Step - que el navegador está abierto");
+		//Abrir el navegador
 		WebDriverManager.chromedriver().setup();
 	    ChromeOptions options= new ChromeOptions();
 		options.addArguments("--incognito");
@@ -59,12 +59,14 @@ public class OrangeEmployeeSteps_PageFactory {
 	@And("el usuario está en la página de login")
 	public void el_usuario_esta_en_pagina_de_login() {
 		System.out.println("Inside Step - el usuario está en la página de login");
+		//Dirigirse a la página de Orange HRM
 		driver.navigate().to("https://opensource-demo.orangehrmlive.com/");	
 	}
 
 	@When("el usuario ingresa {word} y {word}")
 	public void el_usuario_ingresa_username_y_password(String username, String password) {
 		System.out.println("Inside Step - el usuario ingresa username and password");
+		//Hacer login con datos válidos
 		login= new LoginOrangePage_PageFactory(driver);
 		login.ingresoOrange(username, password);
 	}
@@ -72,7 +74,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	@And("el usuario inicia sesión")
 	public void el_usuario_inicia_sesion() {
 		System.out.println("Inside Step - el usuario inicia sesión");
-		//Damos click en boton submit
+		//Hacer click en botón submit
 		login.clickOnSubmit();
 		home= new HomeOrangePage_PageFactory(driver);
 		
@@ -84,6 +86,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	@And("el usuario selecciona agregar empleado e ingresa los datos básicos")
 	public void el_usuario_selecciona_agregar_empleado_e_ingresa_los_datos_basicos() {
 		System.out.println("Inside Step - el usuario selecciona agregar empleado e ingresa los datos básicos");
+		//Ingresar datos básicos del empleado a partir del archivo JSON
 		employee = new EmployeePage_PageFactory(driver);
 		
 		Employee emp = JsonReader.getEmployee("usuario1");
@@ -99,7 +102,8 @@ public class OrangeEmployeeSteps_PageFactory {
 
 	    if (emp.switchEmployee.equalsIgnoreCase("true")) {
 	        employee.clickEnSwitch();
-	        employee.ingresarUsername(emp);
+	        String usernameUnico = employee.generarUsernameUnico(emp);
+	        employee.ingresarUsername(usernameUnico);
 	        employee.ingresarPassword1(emp);
 	        employee.ingresarPassword2(emp);
 	    }
@@ -113,6 +117,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	@And("el usuario ingresa los datos detallados")
 	public void el_usuario_ingresa_los_datos_detallados() {
 		System.out.println("Inside Step - el usuario ingresa los datos detallados");
+		//Ingresar datos de detalle del empleado a partir del archivo JSON
 		employeeDetalle = new EmployeeDetallePage_PageFactory(driver);
 		employeeDetalle.paginaDetallesCargados();
 
@@ -133,6 +138,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	@And("el usuario busca el empleado recién ingresado")
 	public void el_usuario_busca_el_empleado_recien_ingresado() {
 		System.out.println("Inside Step - el usuario busca el empleado recién ingresado");
+		//Buscar al empleado recién ingresado
 		employeeList = new ListEmployeePage_PageFactory(driver);
 		Employee emp = JsonReader.getEmployee("usuario1");
 		employeeList.clickBtnEmployeeList();
@@ -142,7 +148,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	    employeeList.enviarId(emp);
 	    employeeList.enviarApellido(emp);
 	    employeeList.clickBuscar();
-
+	    //System.out.println("emp.apellido: " + emp.apellido);
 	    assertTrue("❌ Employee no encontrado", employeeList.validarEmployee(emp));
 	    employeeList.seleccionarEmpleado(emp);
 	    assertTrue("❌ Página detalle empleado no cargada", employeeDetalle.paginaDetallesCargados());
@@ -150,11 +156,13 @@ public class OrangeEmployeeSteps_PageFactory {
 
 	@And("el usuario intenta iniciar sesión")
 	public void el_usuario_intenta_iniciar_sesion() {
+		//Iniciar sesión
 	    login.clickOnSubmit();
 	}
 	
 	@Then("debería mostrarse un mensaje de credenciales inválidas")
 	public void deberia_mostrarse_un_mensaje_de_credenciales_invalidas() {
+		//Mensaje de error por credenciales inválidas
 	    String mensaje = login.obtenerMensajeError();
 	    assertTrue("❌ No se mostró el mensaje de credenciales inválidas", mensaje.contains("Invalid credentials"));
 	}
@@ -162,7 +170,15 @@ public class OrangeEmployeeSteps_PageFactory {
 	@Then("el usuario cierra sesión")
 	public void el_usuario_cierra_sesion() {
 		System.out.println("Inside Step - el usuario cierra sesión");
+		//Cerrar sesión y el navegador
 		home.salir();
+		driver.quit();
+	}
+	
+	@And("se cierra el navegador")
+	public void se_cierra_el_navegador() {
+		System.out.println("Inside Step - se cierra el navegador");
+		//Cerrar el navegador
 		driver.quit();
 	}
 

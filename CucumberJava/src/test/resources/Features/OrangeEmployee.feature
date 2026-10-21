@@ -23,6 +23,7 @@ Característica: Funcionalidad de agregar empleado
 		Cuando el usuario ingresa <username> y <password>
 		Y el usuario intenta iniciar sesión
 		Entonces debería mostrarse un mensaje de credenciales inválidas
+		Y se cierra el navegador
 		Ejemplos:
 		  | username | password  |
 		  | Admin    | hola  |
