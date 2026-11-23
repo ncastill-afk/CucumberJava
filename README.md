@@ -85,13 +85,13 @@ CucumberJava/
 │   │   │   ├── TestRunner/
 │   │   │   │   └── TestRunnerOrange.java
 │   │   │   ├── StepsDefinitions/
-│   │   │   │   └── OrangeEmployeeSteps_PageFactory.java
-│   │   │   └── pageFactory/
-│   │   │       ├── LoginOrangePage_PageFactory.java
-│   │   │       ├── HomeOrangePage_PageFactory.java
-│   │   │       ├── EmployeeDetallePage_PageFactory.java
-│   │   │       ├── EmployeePage_PageFactory.java
-│   │   │       └── ListEmployeePage_PageFactory.java
+│   │   │   │   └── OrangeEmployeeSteps.java
+│   │   │   └── pages/
+│   │   │       ├── LoginOrangePage.java
+│   │   │       ├── HomeOrangePage.java
+│   │   │       ├── EmployeeDetallePage.java
+│   │   │       ├── EmployeePage.java
+│   │   │       └── ListEmployeePage.java
 │   │   └── resources/
 │   │       ├── Features/
 │   │       │   └── OrangeEmployee.feature
