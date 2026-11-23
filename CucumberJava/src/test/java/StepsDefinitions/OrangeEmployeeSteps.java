@@ -17,24 +17,24 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import pageFactory.HomeOrangePage_PageFactory;
-import pageFactory.LoginOrangePage_PageFactory;
+import pages.EmployeeDetallePage;
+import pages.EmployeePage;
+import pages.HomeOrangePage;
+import pages.ListEmployeePage;
+import pages.LoginOrangePage;
 import utils.Employee;
 import utils.JsonReader;
 import utils.JsonWriter;
-import pageFactory.EmployeePage_PageFactory;
-import pageFactory.EmployeeDetallePage_PageFactory;
-import pageFactory.ListEmployeePage_PageFactory;
 
-public class OrangeEmployeeSteps_PageFactory {
+public class OrangeEmployeeSteps {
 	WebDriver driver=null;
 	
 	//Referir métodos de Page factory
-	LoginOrangePage_PageFactory login;
-	HomeOrangePage_PageFactory home;
-	EmployeePage_PageFactory employee;
-	EmployeeDetallePage_PageFactory employeeDetalle;
-	ListEmployeePage_PageFactory employeeList;
+	LoginOrangePage login;
+	HomeOrangePage home;
+	EmployeePage employee;
+	EmployeeDetallePage employeeDetalle;
+	ListEmployeePage employeeList;
 	
 	@Given("que el navegador está abierto")
 	public void que_el_navegador_esta_abierto() {
@@ -67,7 +67,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	public void el_usuario_ingresa_username_y_password(String username, String password) {
 		System.out.println("Inside Step - el usuario ingresa username and password");
 		//Hacer login con datos válidos
-		login= new LoginOrangePage_PageFactory(driver);
+		login= new LoginOrangePage(driver);
 		login.ingresoOrange(username, password);
 	}
 	
@@ -76,7 +76,7 @@ public class OrangeEmployeeSteps_PageFactory {
 		System.out.println("Inside Step - el usuario inicia sesión");
 		//Hacer click en botón submit
 		login.clickOnSubmit();
-		home= new HomeOrangePage_PageFactory(driver);
+		home= new HomeOrangePage(driver);
 		
 		System.out.println(driver.getCurrentUrl());
 		System.out.println(driver.getTitle());
@@ -87,7 +87,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	public void el_usuario_selecciona_agregar_empleado_e_ingresa_los_datos_basicos() {
 		System.out.println("Inside Step - el usuario selecciona agregar empleado e ingresa los datos básicos");
 		//Ingresar datos básicos del empleado a partir del archivo JSON
-		employee = new EmployeePage_PageFactory(driver);
+		employee = new EmployeePage(driver);
 		
 		Employee emp = JsonReader.getEmployee("usuario1");
 
@@ -118,7 +118,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	public void el_usuario_ingresa_los_datos_detallados() {
 		System.out.println("Inside Step - el usuario ingresa los datos detallados");
 		//Ingresar datos de detalle del empleado a partir del archivo JSON
-		employeeDetalle = new EmployeeDetallePage_PageFactory(driver);
+		employeeDetalle = new EmployeeDetallePage(driver);
 		employeeDetalle.paginaDetallesCargados();
 
 		Employee emp = JsonReader.getEmployee("usuario1");
@@ -139,7 +139,7 @@ public class OrangeEmployeeSteps_PageFactory {
 	public void el_usuario_busca_el_empleado_recien_ingresado() {
 		System.out.println("Inside Step - el usuario busca el empleado recién ingresado");
 		//Buscar al empleado recién ingresado
-		employeeList = new ListEmployeePage_PageFactory(driver);
+		employeeList = new ListEmployeePage(driver);
 		Employee emp = JsonReader.getEmployee("usuario1");
 		employeeList.clickBtnEmployeeList();
 

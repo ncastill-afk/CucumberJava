@@ -1,4 +1,4 @@
-package pageFactory;
+package pages;
 
 import java.time.Duration;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginOrangePage_PageFactory {
+public class LoginOrangePage {
 	
 	WebDriver driver;
 	
@@ -30,7 +30,7 @@ public class LoginOrangePage_PageFactory {
 	WebElement mensajeError;
 
 	//Método constructor
-	public LoginOrangePage_PageFactory(WebDriver driver) {
+	public LoginOrangePage(WebDriver driver) {
 		//Hacer referencia al driver
 		this.driver=driver;
 		//Inicializar los elementos haciendo referencia al mismo driver

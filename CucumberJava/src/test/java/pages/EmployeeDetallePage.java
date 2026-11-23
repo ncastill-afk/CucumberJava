@@ -1,4 +1,4 @@
-package pageFactory;
+package pages;
 
 import java.time.Duration;
 import java.nio.file.Paths;
@@ -15,7 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import utils.Employee;
 
 
-public class EmployeeDetallePage_PageFactory {
+public class EmployeeDetallePage {
 	
 	WebDriver driver;
 	
@@ -87,7 +87,7 @@ public class EmployeeDetallePage_PageFactory {
 	@FindBy(xpath = "//p[contains(@class,'oxd-text--toast-message')]")
 	WebElement toastMessage;
 	
-	public EmployeeDetallePage_PageFactory(WebDriver driver) {
+	public EmployeeDetallePage(WebDriver driver) {
 		//Hacer referencia al driver
 		this.driver=driver;
 		//Inicializar los elementos hacciendo referencia al mismo driver

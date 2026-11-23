@@ -1,4 +1,4 @@
-package pageFactory;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import java.time.Duration;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomeOrangePage_PageFactory {
+public class HomeOrangePage {
 	
 	WebDriver driver;
 	
@@ -41,7 +41,7 @@ public class HomeOrangePage_PageFactory {
 		btnLogout.click();
 	}
 	
-	public HomeOrangePage_PageFactory(WebDriver driver) {
+	public HomeOrangePage(WebDriver driver) {
 		//Hacemos referencia al driver
 		this.driver=driver;
 		//Inicializamos los elementos hacciendo referencia al mismo driver

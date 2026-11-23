@@ -1,4 +1,4 @@
-package pageFactory;
+package pages;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Employee;
 
-public class EmployeePage_PageFactory {
+public class EmployeePage {
 
     WebDriver driver;
 	
@@ -58,7 +58,7 @@ public class EmployeePage_PageFactory {
 	WebElement toastMessage;
 
 	
-	public EmployeePage_PageFactory(WebDriver driver) {
+	public EmployeePage(WebDriver driver) {
 		//Hacer referencia al driver
 		this.driver=driver;
 		//Inicializar los elementos hacciendo referencia al mismo driver

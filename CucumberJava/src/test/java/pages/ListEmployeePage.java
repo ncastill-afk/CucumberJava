@@ -1,4 +1,4 @@
-package pageFactory;
+package pages;
 
 import java.time.Duration;
 
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Employee;
 
-public class ListEmployeePage_PageFactory {
+public class ListEmployeePage {
 	
 	WebDriver driver;
 	
@@ -35,7 +35,7 @@ public class ListEmployeePage_PageFactory {
 	WebElement tablaResultados;
 	
 	
-	public ListEmployeePage_PageFactory(WebDriver driver) {
+	public ListEmployeePage(WebDriver driver) {
 		//Hacer referencia al driver
 		this.driver=driver;
 		//Inicializar los elementos hacciendo referencia al mismo driver
