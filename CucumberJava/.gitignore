@@ -12,7 +12,6 @@
 /replay_pid42052.log
 /replay_pid50480.log
 /replay_pid50720.log
-/src/test/java/pageFactory/
 /src/test/java/pageFactory/ConfirmaciónPage_PageFactory.java
 /src/test/java/pageFactory/DestinoPage_PageFactory.java
 /src/test/java/pageFactory/HomePage_PageFactory.java
