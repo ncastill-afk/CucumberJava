@@ -58,7 +58,7 @@ Las pruebas se definen en archivos Feature utilizando Cucumber y se implementan 
 
 - **Feature:** describe los escenarios de prueba en un lenguaje legible.
 - **Step Definitions:** relaciona los pasos de Cucumber con los métodos Java.
-- **PageFactory:** centraliza los localizadores y las acciones de cada página.
+- **Pages:** centraliza los localizadores y las acciones de cada página.
 - **TestRunner:** permite ejecutar los escenarios mediante Cucumber y JUnit.
 
 ## Datos y archivos de prueba
